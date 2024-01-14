@@ -2,12 +2,10 @@ export const info = {
   baseUrl: "https://hanzellrivera.dev",
   name: "Hanzell Rivera",
   jobDescription: "Full Stack Developer",
-  about: `Desarrollador Full Stack con 3 años de experiencia en el desarrollo de software empresarial, ofrezco una amplia gama de conocimientos
-  técnicos a cualquier proyecto. Mi habilidad abarca una variedad de tecnologías de vanguardia, incluyendo JavaScript, NodeJS, Express, ReactJS,
-  TypeScript, React Native, Dart, Flutter, Python, .Net Core, ASP.Net, SQL. Tengo un historial comprobado de entregar soluciones de software de
-  alta calidad. Me enorgullezco de mis habilidades excepcionales de comunicación y colaboración y siempre estoy dispuesto a aprender nuevas
-  tecnologías y metodologías. Sobre todo, estoy profundamente comprometido con el arte y la ciencia de la programación.
-  `,
+  about: `Ingeniero en Sistemas y Desarrollador Full Stack con 3 años de experiencia en software empresarial, ofrezco amplios conocimientos técnicos en 
+    JavaScript, NodeJS, Express, ReactJS, TypeScript, React Native, Dart, Flutter, Python, .Net Core, ASP.Net y SQL. 
+    Con historial probado de entregas de software de alta calidad, destaco por habilidades excepcionales de comunicación y colaboración. 
+    Siempre dispuesto a aprender nuevas tecnologías y metodologías, me comprometo profundamente con el arte y la ciencia de la programación.`,
 
   experience: [
     {
@@ -17,13 +15,10 @@ export const info = {
       startDate: "Enero 2023",
       endDate: "Diciembre 2023",
       description: [
-        `Con la modalidad de outsourcing formé parte del equipo de desarrollo de la aplicación móvil Tigo Money de la empresa Millicom, trabajé en la
-        integración de funcionalidades relacionadas con paquetes/recargas y remesas. Tambien, en las integraciones de onboarding y login, Además,
-        fui parte del equipo de cashin y cashout, Mi principal responsabilidad consistió en crear nuevos features requeridos y asistencias a potenciales
-        bugs utilizando Flutter, Además, contribuí al desarrollo de API's utilizando Python para la consulta de remesas y facetec. Estas experiencias
-        me han permitido desempeñarme como full stack developer, trabajando tanto en el desarrollo frontend utilizando Flutter, como en la creación
-        de API's con Python para el backend. Estoy emocionado de seguir creciendo en el campo de desarrollo de aplicaciones móviles y de contribuir al
-        éxito de proyectos innovadores.`
+        `En outsourcing, contribuí al desarrollo de la aplicación móvil Tigo Money de Millicom, centrado en paquetes/recargas, remesas, onboarding, login, cashin y cashout. 
+        Responsable de crear nuevos features y resolver bugs con Flutter. Además, aporté al desarrollo de API's en Python para remesas y facetec. 
+        Mi experiencia me ha formado como full stack developer, destacando en frontend (Flutter) y backend (Python). 
+        Emocionado por seguir creciendo en el desarrollo de aplicaciones móviles y contribuir al éxito de proyectos innovadores.`
       ],
     },
 
@@ -34,14 +29,9 @@ export const info = {
       startDate: "Julio 2021",
       endDate: "Diciembre 2022",
       description: [
-        `Como Desarrollador Backend en Aludra, fui responsable del desarrollo de nuevos proyectos de integración y APIs. Utilizando mi experiencia
-        en C#, .NET Core y ASP.NET, dirigí con éxito la integración de sistemas externos como NAF, Ivend y Salesforce, reemplazando Event Grids con
-        tecnologías sin servidor como Azure Functions y Queues, y enviando correos electrónicos con SendGrid. Mis habilidades en NodeJS, caché de
-        Redis y procesos eficientes de carga de datos me ayudaron en el desarrollo de APIs y validaciones para obtener respuestas más rápidas en las
-        aplicaciones. Fui capaz de optimizar procesos masivos de carga de datos, integrando información de productos, precios e inventario con
-        sistemas externos. Además de mis habilidades técnicas, también mantuve y desarrollé nuevas funcionalidades en los servicios y módulos del
-        SaaS-PIM (Gestor de Información de Productos) de Aludra. Con un enfoque ágil (SCRUM) y fuertes habilidades de comunicación y
-        colaboración, aseguré la funcionalidad sin fisuras de todos los servicios, ofreciendo un desarrollo de software de alta calidad.`
+        `Como Desarrollador Backend en Aludra, lideré proyectos de integración y APIs, utilizando C#, .NET Core, ASP.NET, NodeJS, Redis, Azure Functions, Queues y SendGrid. 
+        Gestioné con éxito la integración de sistemas externos como NAF, Ivend y Salesforce, optimizando procesos de carga de datos para respuestas más rápidas. 
+        Mantuve y desarrollé funcionalidades en el SaaS-PIM de Aludra, asegurando un desarrollo de software de alta calidad con enfoque ágil (SCRUM) y sólidas habilidades de comunicación.`
       ],
     },
 
@@ -52,13 +42,10 @@ export const info = {
       startDate: "Marzo 2021",
       endDate: "Julio 2021",
       description: [
-        `Formé parte del equipo encargado de desarrollar la aplicación móvil TypeMatch. La aplicación se enfoca en citas y conexiones, y fue
-        construida usando NodeJS, Express y MySQL. Mejoré la lógica de emparejamiento para aumentar la precisión de las parejas o individuos
-        sugeridos en función de las preferencias personales del usuario.• Mejoré la experiencia del usuario consumiendo la API de un CRM (AgilCRM)
-        cuando dos personas coincidían, iniciando una conversación, creando un nuevo perfil o actualizando a premium. Esto ayudó a enviar
-        información al usuario de manera más eficiente.• Además de la aplicación TypeMatch, también trabajé en el proyecto Kidlind, una aplicación
-        educativa para niños. Fui responsable del desarrollo de APIs en NodeJS, la conexión a APIs externas como MagicBlox para los recursos de libros,
-        y la gestión de la lógica de los libros.`
+        `Parte del equipo de desarrollo de la aplicación móvil TypeMatch, centrada en citas y conexiones. 
+        Construida con NodeJS, Express y MySQL, mejoré la lógica de emparejamiento para aumentar la precisión de las sugerencias. 
+        Optimicé la experiencia del usuario al consumir la API de un CRM (AgilCRM) para iniciar conversaciones y actualizar perfiles. 
+        Además, trabajé en Kidlind, una aplicación educativa, desarrollando APIs en NodeJS, conectando con MagicBlox para recursos de libros y gestionando la lógica de los libros.`
       ],
     },
     {
@@ -77,15 +64,15 @@ export const info = {
 
   education: [
     {
-      name: "Ingeniería en Sistemas de la Informacion",
+      name: "UNAN",
       location: "Nicaragua, Managua",
       startDate: "2016",
       endDate: "2021",
       description: [
-        "Diplomado de Ingeniería en Sistemas de la Informacion",
+        "Título de Ingeniería en Sistemas de la Informacion",
       ],
     },
-    
+
   ],
 
   socialMedia: {
@@ -103,31 +90,31 @@ export const info = {
       thumbnail: "/assets/images/bebidas.png",
       githubUrl: "https://github.com/RiveraHan/react-bebidas",
       liveUrl: "https://drinkrecipefinder.netlify.app/",
-    },{
+    }, {
       title: "Buscador del Clima",
       isFeatured: true,
       thumbnail: "/assets/images/clima.png",
       githubUrl: "https://github.com/RiveraHan/react-consulta-clima",
       liveUrl: "https://searchsweather.netlify.app/",
-    },{
+    }, {
       title: "Buscador de Letras de Canciones",
       isFeatured: true,
       thumbnail: "/assets/images/letras.png",
       githubUrl: "https://github.com/RiveraHan/react-letras-cancion",
       liveUrl: "https://searchsongs.netlify.app/",
-    },{
+    }, {
       title: "E-commerce",
       isFeatured: true,
       thumbnail: "/assets/images/e-commerce.png",
       githubUrl: "https://github.com/RiveraHan/carrito-nextjs-typescript-tailwind",
       liveUrl: "https://e-commercehan.netlify.app/",
-    },,{
+    }, , {
       title: "Pokedex",
       isFeatured: true,
       thumbnail: "/assets/images/pokedex.png",
       githubUrl: "https://github.com/RiveraHan/pokedex",
       liveUrl: "https://github.com/RiveraHan/pokedex",
-    },,{
+    }, , {
       title: "TiktokClone",
       isFeatured: true,
       thumbnail: "/assets/images/tiktokClone.png",
