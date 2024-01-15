@@ -11,11 +11,13 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/tailwind": "^1.0.0",
-    "astro": "^1.0.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "astro": "^4.1.2",
     "astro-robots-txt": "^0.3.8"
   },
   "dependencies": {
-    "@vercel/analytics": "^1.1.1"
+    "@astrojs/vercel": "^6.1.4",
+    "@vercel/analytics": "^1.1.1",
+    "tailwindcss": "^3.4.1"
   }
 }
