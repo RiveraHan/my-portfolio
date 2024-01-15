@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-portfolio-uzair.vercel.app",
+  site: "https://hanzellrivera.vercel.app",
   integrations: [
     tailwind(),
     sitemap({
@@ -16,4 +16,10 @@ export default defineConfig({
     }),
     robotsTxt(),
   ],
+  output: 'server',
+  adapter: vercel({
+    webAnalytics: {
+      enable: true
+    }
+  })
 });
