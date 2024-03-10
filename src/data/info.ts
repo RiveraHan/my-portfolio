@@ -67,11 +67,10 @@ export const info = {
   ],
 
   socialMedia: {
-    facebook: "https://www.facebook.com/",
-    twitter: "https://twitter.com/",
+    twitter: "https://twitter.com/hanzellrivera",
     github: "https://github.com/RiveraHan",
     email: "mailto:hanzellrivera95@gmail.com",
-    linkedin: "https://www.linkedin.com/in/hanzell-rivera/",
+    linkedin: "https://www.linkedin.com/in/hanzell-rivera",
   },
 
   projects: [
