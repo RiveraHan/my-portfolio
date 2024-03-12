@@ -15,6 +15,7 @@ export const info = {
         `Con la modalidad de outsourcing, contribuí al desarrollo de la aplicación móvil Tigo Money de Millicom, en esta app tipo wallet fui parte de los equipos de paquetes/recargas (a números telefónicos), remesas, onboarding, login, cashin y cashout. 
         Fui capaz de crear nuevos features y resolver bugs utilizando Flutter. Además, aporté al desarrollo de API's en Python para remesas`
       ],
+      skills: ['Dart', 'Flutter', 'Futter Modular', 'MicroFrontend', 'Python', 'FastAPI'],
     },
 
     {
@@ -27,6 +28,7 @@ export const info = {
         `Como Desarrollador Backend en Aludra, lideré proyectos de integración y APIs, utilizando C#, .NET Core, ASP.NET, NodeJS, Redis, Azure Functions, Queues y SendGrid. 
         Gestioné con éxito la integración de sistemas externos como NAF, Ivend y Salesforce, optimizando procesos de carga de datos para respuestas más rápidas.`
       ],
+      skills: ['.NET Core', 'ASP.NET', 'C#', 'NodeJS', 'Express.js', 'SQL Server', 'Redis Cache', 'Azure Functions', 'Queues', 'EvendGrid'],
     },
 
     {
@@ -40,6 +42,7 @@ export const info = {
         Construida con NodeJS, Express y MySQL, mejoré la lógica de emparejamiento para aumentar la precisión de las sugerencias.  
         Además, trabajé en Kidlind, una aplicación educativa, desarrollando APIs en NodeJS, gestión de recursos de libros.`
       ],
+      skills: ['NodeJS', 'Express', 'MySQL', 'SocketsIO'],
     },
     {
       name: "Nexitus",
@@ -50,6 +53,7 @@ export const info = {
       description: [
         `Trabajé en el sitio web oficial de la empresa utilizando la tecnología NextJS para mostrar sus servicios y establecer su identidad en línea.`
       ],
+      skills: ['HTML', 'CSS', 'NEXTJS']
     },
   ],
 

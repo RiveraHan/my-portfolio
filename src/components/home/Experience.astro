@@ -10,7 +10,7 @@ const { title, details } = Astro.props as IExperiences;
   <h2 class="w-[15rem] mt-16">{title}</h2>
   <div class="w-full">
     {
-      details.map((item) => (
+      details.map((item, index) => (
         <div class="my-16">
           <div class="flex justify-between items-center flex-wrap">
             <h3 class="text-xl font-semibold">{item.name}</h3>
@@ -25,6 +25,13 @@ const { title, details } = Astro.props as IExperiences;
               <li class="text-black dark:text-white">{item}</li>
             ))}
           </ul>
+
+          <p class="text-md font-semibold dark:text-gray mt-3">
+            {title == "EXPERIENCIA" ? "Skills:" : ""}{" "}
+            <span class="text-blue">
+              {item.skills && item.skills.join(", ")}
+            </span>
+          </p>
         </div>
       ))
     }
