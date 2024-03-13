@@ -28,6 +28,7 @@ const { title, details } = Astro.props as IExperiences;
 
           <p class="text-md font-semibold dark:text-gray mt-3">
             {title == "EXPERIENCIA" ? "Skills:" : ""}
+
             <span class="text-blue">
               {item.skills && item.skills.join(", ")}
             </span>
