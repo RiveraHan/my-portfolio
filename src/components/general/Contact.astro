@@ -1,0 +1,39 @@
+<div class="flex gap-2 items-center justify-center w-full max-w-[24rem] mt-10">
+    <input
+        id="email-copy"
+        type="text"
+        class="flex-1 dark:bg-[#2f373a] border dark:border-[#21282b] dark:text-white text-sm rounded-lg p-2.5"
+        value="hanzellrivera95@gmail.com"
+        disabled
+        readonly
+    />
+    <button
+        id="button-copied"
+        onclick="copyClipboard()"
+        class="dark:text-light bg-[#33d2ff] hover:bg-[#5dd7ff] focus:ring-4 focus:outline-none focus:ring-sky-300 dark:focus:ring-sky-400 font-medium rounded-lg text-sm py-2.5 px-4 w-20"
+    >
+        Copiar
+    </button>
+</div>
+
+<script is:inline>
+    function copyClipboard() {
+        let copyText = document.getElementById("email-copy");
+
+        copyText.select();
+
+        try {
+            var buttonClipboard = document.getElementById("button-copied");
+            buttonClipboard.innerText = "Copiado!";
+            document.execCommand("copy");
+
+            setTimeout(() => {
+                buttonClipboard.innerText = "Copiar";
+                buttonClipboard.blur();
+            }, 3000);
+        } catch (err) {
+            console.error("Failed to copy: ", err);
+            buttonClipboard.innerText = "Ups!";
+        }
+    }
+</script>

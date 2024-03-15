@@ -2,7 +2,7 @@ export const info = {
   baseUrl: "https://hanzellrivera.vercel.app",
   name: "Hanzell Rivera",
   jobDescription: "Full Stack Developer",
-  about: `Ingeniero en Sistemas y Desarrollador Full Stack con 3 años de experiencia en software empresarial.`,
+  about: `Ingeniero en Sistemas y Desarrollador de Software Full Stack.`,
 
   experience: [
     {
