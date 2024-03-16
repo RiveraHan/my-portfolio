@@ -19,21 +19,22 @@
 <script is:inline>
     function copyClipboard() {
         let copyText = document.getElementById("email-copy");
+        const textToCopy = copyText.value;
 
-        copyText.select();
-
-        try {
-            var buttonClipboard = document.getElementById("button-copied");
-            buttonClipboard.innerText = "Copiado!";
-            document.execCommand("copy");
-
-            setTimeout(() => {
-                buttonClipboard.innerText = "Copiar";
-                buttonClipboard.blur();
-            }, 3000);
-        } catch (err) {
-            console.error("Failed to copy: ", err);
-            buttonClipboard.innerText = "Ups!";
-        }
+        navigator.clipboard
+            .writeText(textToCopy)
+            .then(() => {
+                var buttonClipboard = document.getElementById("button-copied");
+                buttonClipboard.innerText = "Copiado!";
+                setTimeout(() => {
+                    buttonClipboard.innerText = "Copiar";
+                    buttonClipboard.blur();
+                }, 3000);
+            })
+            .catch((err) => {
+                console.error("Failed to copy: ", err);
+                var buttonClipboard = document.getElementById("button-copied");
+                buttonClipboard.innerText = "Ups!";
+            });
     }
 </script>
