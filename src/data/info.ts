@@ -31,7 +31,7 @@ export const info: IInfo = {
       tags: ['Flutter', 'Node.js', 'PostgreSQL', 'AI / LLMs', 'RBAC', 'SaaS'],
     },
     {
-      name: 'Hypernova Labs',
+      name: 'HyperNova Labs',
       position: 'Backend Developer',
       location: 'Remote',
       startDate: 'Sep 2024',

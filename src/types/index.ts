@@ -13,7 +13,7 @@ export interface IEducation {
   name: string;
   location: string;
   startDate: string;
-  endDate: string;
+  endDate: string | null;
   description: string[];
 }
 

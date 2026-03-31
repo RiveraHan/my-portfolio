@@ -93,7 +93,7 @@ export const i18n = {
     },
     footer: {
       rights: '© 2026 Hanzell Rivera',
-      builtWith: 'Built with Astro 6 + TailwindCSS 4',
+      builtWith: 'Built with Astro 5 + TailwindCSS 4',
     },
   },
 
@@ -190,7 +190,7 @@ export const i18n = {
     },
     footer: {
       rights: '© 2026 Hanzell Rivera',
-      builtWith: 'Built with Astro 6 + TailwindCSS 4',
+      builtWith: 'Built with Astro 5 + TailwindCSS 4',
     },
   },
 } as const

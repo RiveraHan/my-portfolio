@@ -10,9 +10,15 @@ import '../styles/style.css'
   <head>
     <!-- i18n: set language before first paint to avoid flash -->
     <script is:inline>
-      const lang = localStorage.getItem('lang') || 'es'
-      document.documentElement.setAttribute('data-lang', lang)
-      document.documentElement.setAttribute('lang', lang)
+      (function() {
+        try {
+          var lang = localStorage.getItem('lang') || 'es'
+        } catch (e) {
+          var lang = 'es'
+        }
+        document.documentElement.setAttribute('data-lang', lang)
+        document.documentElement.setAttribute('lang', lang)
+      })()
     </script>
     <slot name="head" />
   </head>
