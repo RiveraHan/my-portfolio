@@ -46,7 +46,7 @@ Complete redesign and content update of Hanzell Rivera's personal portfolio. The
 // astro.config.mjs
 import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
-import vercel from '@astrojs/vercel/static'
+import vercel from '@astrojs/vercel'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
@@ -99,11 +99,11 @@ export default defineConfig({
 ### 5.1 Navbar
 - Fixed, top, full-width, `backdrop-filter: blur(16px)`
 - Left: `HR.` logo (monospace, blue)
-- Center: links — About · Skills · Experience · Projects · Contact (section anchors, smooth scroll)
+- Center: links — About · Skills · Experience · Projects · Education · Contact (section anchors, smooth scroll)
 - Right: Language toggle pill (ES · EN) + "⬇ Download CV" button (blue filled)
 - **CV file:** `public/assets/cv/Hanzell_Rivera_CV.pdf` — owner must add this PDF before deploy; button uses `download` attribute on `<a>` tag. Until file is added, button links to LinkedIn as fallback.
 - **Mobile (< 768px):** hamburger icon replaces center links; clicking opens a full-screen overlay nav with links + lang toggle + CV button; overlay closes on link click or outside tap; breakpoint: `md` (768px)
-- Eyebrow numbering sequence: `// 01 About` · `// 02 Skills` · `// 03 Experience` · `// 04 Projects` · `// 05 Education` · `// 06 Contact`
+- Eyebrow numbering sequence: `// 01 · About` · `// 02 · Skills` · `// 03 · Experience` · `// 04 · Projects` · `// 05 · Education` · `// 06 · Contact`
 
 ### 5.2 Hero
 - Full viewport height, centered vertically
@@ -297,7 +297,24 @@ src/
 
 ---
 
-## 10. Out of Scope
+## 10. Environment Variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `PUBLIC_FORMSPREE_ID` | Yes (for contact form) | Formspree form ID — get from formspree.io after creating a form |
+
+**Setup steps:**
+1. Create a free account at formspree.io and create a new form
+2. Copy the form ID (e.g., `xrgvpwkz`)
+3. Add to `.env` locally: `PUBLIC_FORMSPREE_ID=xrgvpwkz`
+4. Add the same variable in Vercel dashboard → Project Settings → Environment Variables
+5. Commit a `.env.example` file with `PUBLIC_FORMSPREE_ID=` (empty value) so future contributors know it's required
+
+**Fallback behavior if missing:** The contact form renders but the submit button is disabled with a tooltip "Form not configured". No build error — accessed via `import.meta.env.PUBLIC_FORMSPREE_ID ?? ''`.
+
+---
+
+## 11. Out of Scope
 
 - Blog section
 - Dark/light mode toggle (dark-only for this redesign — cleaner, consistent with Dark Tech style)
