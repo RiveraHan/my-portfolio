@@ -16,6 +16,7 @@
       "@layouts/*": ["src/layouts/*"],
       "@components/*": ["src/components/*"],
       "@data": ["src/data/info"],
+      "@data/*": ["src/data/*"],
       "@utils": ["src/utils"],
       "@types": ["src/types"]
     }

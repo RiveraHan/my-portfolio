@@ -1,39 +1,45 @@
-export interface IMetaHead {
-  title: string;
-  description: string;
-  ogImageUrl: string;
-}
-
-export interface IHeroProps {
-  name: string;
-  about: string;
-}
-
+// src/types/index.ts
 export interface IExperience {
   name: string;
   position: string;
   location: string;
   startDate: string;
+  endDate: string | null; // null = current/present
+  description: string[];
+  tags?: string[];
+}
+
+export interface IEducation {
+  name: string;
+  location: string;
+  startDate: string;
   endDate: string;
   description: string[];
-  skills: string[];
-}
-export interface IExperiences {
-  title: string;
-  details: IExperience[];
 }
 
 export interface IProject {
   title: string;
-  isFeatured: boolean;
-  thumbnail: string;
-  githubUrl: string;
-  liveUrl: string;
-}
-export interface IProjects {
-  projects: IProject[];
+  isFeatured?: boolean;
+  thumbnail?: string;
+  thumbnailGradient?: string;
+  description: string;
+  tags: string[];
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
-export interface IProjectDetails {
-  projectDetail: IProject;
+export interface IInfo {
+  baseUrl: string;
+  name: string;
+  jobDescription: string;
+  about: string;
+  experience: IExperience[];
+  education: IEducation[];
+  socialMedia: {
+    twitter?: string;
+    github?: string;
+    email?: string;
+    linkedin?: string;
+  };
+  projects: IProject[];
 }
