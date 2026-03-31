@@ -28,10 +28,35 @@ Complete redesign and content update of Hanzell Rivera's personal portfolio. The
 |---|---|---|
 | Framework | Astro 4.1.2 | Astro 5.x (latest) |
 | Styling | TailwindCSS 3.4.1 | TailwindCSS 4.x |
+| TailwindCSS integration | @astrojs/tailwind | @tailwindcss/vite (Vite plugin — no astro integration package needed) |
 | Astro adapter | @astrojs/vercel 6.x | @astrojs/vercel latest |
 | Analytics | @vercel/analytics 1.x | @vercel/analytics latest |
 | Sitemap | @astrojs/sitemap 1.x | @astrojs/sitemap latest |
 | Deployment | Vercel | Vercel (unchanged) |
+
+### TailwindCSS 4 Migration Notes
+- Remove `@astrojs/tailwind` and `tailwind.config.mjs`
+- Add `@tailwindcss/vite` to `vite.plugins` in `astro.config.mjs`
+- Replace `@tailwind base/components/utilities` directives with `@import "tailwindcss"` in `style.css`
+- Design tokens (colors, fonts) moved to `@theme` block in `style.css` instead of `tailwind.config.mjs`
+- Output mode: `output: 'static'` — portfolio is fully static, no SSR needed (simpler, faster, cheaper)
+
+### Astro Config target
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config'
+import tailwindcss from '@tailwindcss/vite'
+import vercel from '@astrojs/vercel/static'
+import sitemap from '@astrojs/sitemap'
+
+export default defineConfig({
+  site: 'https://hanzellrivera.vercel.app',
+  output: 'static',
+  adapter: vercel(),
+  integrations: [sitemap()],
+  vite: { plugins: [tailwindcss()] },
+})
+```
 
 ---
 
@@ -74,9 +99,11 @@ Complete redesign and content update of Hanzell Rivera's personal portfolio. The
 ### 5.1 Navbar
 - Fixed, top, full-width, `backdrop-filter: blur(16px)`
 - Left: `HR.` logo (monospace, blue)
-- Center: links — About · Skills · Experience · Projects · Contact
+- Center: links — About · Skills · Experience · Projects · Contact (section anchors, smooth scroll)
 - Right: Language toggle pill (ES · EN) + "⬇ Download CV" button (blue filled)
-- Mobile: hamburger menu collapsing center links
+- **CV file:** `public/assets/cv/Hanzell_Rivera_CV.pdf` — owner must add this PDF before deploy; button uses `download` attribute on `<a>` tag. Until file is added, button links to LinkedIn as fallback.
+- **Mobile (< 768px):** hamburger icon replaces center links; clicking opens a full-screen overlay nav with links + lang toggle + CV button; overlay closes on link click or outside tap; breakpoint: `md` (768px)
+- Eyebrow numbering sequence: `// 01 About` · `// 02 Skills` · `// 03 Experience` · `// 04 Projects` · `// 05 Education` · `// 06 Contact`
 
 ### 5.2 Hero
 - Full viewport height, centered vertically
@@ -94,7 +121,7 @@ Complete redesign and content update of Hanzell Rivera's personal portfolio. The
 
 ### 5.3 About Me
 - Two-column grid
-- Left: 3 paragraphs of bio text (ES/EN), 4 stat cards (6+ años, 7 empresas, M+ usuarios, 1 startup)
+- Left: 3 paragraphs of bio text (ES/EN), 4 stat cards (6+ años, 7 empresas, "Millones+ usuarios (Tigo Money)", 1 startup)
 - Right: 4 value items with icon, title, and description:
   1. Clean Code & Architecture (BLoC, RiverPod, Clean Architecture)
   2. Mobile-First (Flutter iOS+Android single codebase)
@@ -113,8 +140,11 @@ Complete redesign and content update of Hanzell Rivera's personal portfolio. The
 ### 5.5 Experience
 - Two-column timeline layout: date/company on left, details on right
 - Vertical line connecting timeline items
-- Active dot glow for current jobs
+- Active dot glow (green, box-shadow pulse) for entries where `endDate` is `null` (current)
 - 7 entries (newest first):
+- **Data shape extension** — `info.ts` experience entries get two new optional fields:
+  - `endDate: string | null` — `null` means current/present
+  - `tags: string[]` — tech chips shown below description (rename existing `skills` to `tags` for consistency)
 
 | # | Company | Role | Period |
 |---|---|---|---|
@@ -137,16 +167,18 @@ Complete redesign and content update of Hanzell Rivera's personal portfolio. The
 #### Project Grid (3 columns)
 Projects with thumbnail, title, description, tech stack tags, and GitHub/Live links:
 
-| Project | Stack | Description |
-|---|---|---|
-| tiktokClone | Flutter, Dart | Clone funcional de TikTok — feed de videos, navegación, UI mobile |
-| cryptoView | React, JavaScript | Dashboard de precios de criptomonedas en tiempo real |
-| E-Commerce | Next.js, TypeScript, Tailwind | Tienda online con carrito, filtros y checkout |
-| todo-list (Angular + Backend) | Angular, TypeScript, Node.js | App full stack con frontend Angular y API REST |
-| react-hexagonal-example | React, TypeScript | Ejemplo de arquitectura hexagonal en frontend |
-| AppVenta | C# .NET | Sistema de punto de venta desktop |
-| Pokedex | TypeScript | Pokédex con búsqueda y detalle por Pokémon |
-| Buscador de Recetas | React | Buscador de recetas de bebidas vía API |
+| Project | Stack | Thumbnail | Description |
+|---|---|---|---|
+| tiktokClone | Flutter, Dart | existing `/assets/images/tiktokClone.png` | Clone funcional de TikTok — feed de videos, navegación, UI mobile |
+| cryptoView | React, JavaScript | gradient placeholder (purple→blue) | Dashboard de precios de criptomonedas en tiempo real |
+| E-Commerce | Next.js, TypeScript, Tailwind | existing `/assets/images/e-commerce.png` | Tienda online con carrito, filtros y checkout |
+| todo-list (Angular + Backend) | Angular, TypeScript, Node.js | gradient placeholder (green→teal) | App full stack con frontend Angular y API REST |
+| react-hexagonal-example | React, TypeScript | gradient placeholder (blue→purple) | Implementación de arquitectura hexagonal en React — separación de capas, puertos y adaptadores |
+| AppVenta | C# .NET | gradient placeholder (yellow→orange) | Sistema de punto de venta — gestión de productos, ventas y clientes |
+| Pokedex | TypeScript | existing `/assets/images/pokedex.png` | Pokédex con búsqueda y ficha detallada por Pokémon |
+| Buscador de Recetas | React | existing `/assets/images/bebidas.png` | Buscador de recetas de bebidas vía API externa |
+
+**Thumbnail note:** Projects without existing images use CSS `linear-gradient` backgrounds as placeholders — no image files needed.
 
 ### 5.7 Education & Certifications
 - Left card: UNAN — Ingeniería en Sistemas de la Información (2017–2021)
@@ -160,7 +192,11 @@ Projects with thumbnail, title, description, tech stack tags, and GitHub/Live li
 - Two-column layout
 - Left: headline + description + contact link items (email, LinkedIn, GitHub, ubicación)
 - Right: contact form — name, email, message textarea, submit button
-- Form submission: static form via Netlify Forms or Formspree (no backend required)
+- **Form submission: Formspree** (not Netlify Forms — site deploys on Vercel, not Netlify)
+  - Create free account at formspree.io, create a form, get endpoint URL
+  - Form `action` points to `https://formspree.io/f/<FORM_ID>`
+  - Store form ID in `.env` as `PUBLIC_FORMSPREE_ID` and reference in component
+  - Show success/error state after submission (no page reload — JS fetch)
 - Location updated: Managua, Nicaragua · Remote First
 
 ### 5.9 Footer
@@ -170,12 +206,36 @@ Projects with thumbnail, title, description, tech stack tags, and GitHub/Live li
 
 ## 6. Bilingual (ES / EN) Implementation
 
-- Language toggle in navbar: pill button switching between `es` and `en`
-- All text content stored in `src/data/i18n.ts` as a typed object with `es` and `en` keys
-- Active language stored in `localStorage` and Astro's reactive store (or Nano Stores)
-- Components read from the active language object
+**Strategy: CSS class swap on `<html>` + data attributes (no SSR, no islands required)**
+
+Since the site is fully static (`output: 'static'`), Astro components render at build time and cannot read `localStorage`. The bilingual toggle works as follows:
+
+1. **All text for both languages is rendered in the HTML** — each translatable element renders two `<span>` tags with `data-lang="es"` and `data-lang="en"` respectively
+2. **Active language is stored in `localStorage`** (default: `"es"`)
+3. **A small inline `<script>` in `<head>`** reads `localStorage` and sets `data-lang` on `<html>` before first paint (no flash)
+4. **CSS rule** hides inactive language: `[data-lang="es"] [data-lang="en"] { display: none }` and vice versa
+5. **Toggle button** flips `data-lang` on `<html>` and writes to `localStorage`
+
+**`src/data/i18n.ts` structure:**
+```ts
+export const i18n = {
+  es: {
+    nav: { about: 'Sobre mí', skills: 'Skills', ... },
+    hero: { greeting: 'Hola, soy', cta: 'Ver Proyectos', ... },
+    about: { title: 'Un poco sobre mí', ... },
+    // ... all sections
+  },
+  en: {
+    nav: { about: 'About', skills: 'Skills', ... },
+    hero: { greeting: "Hi, I'm", cta: 'View Projects', ... },
+    // ...
+  }
+}
+```
+
 - Default language: Spanish (ES)
-- URLs remain the same (no `/en` route prefix) — purely client-side toggle
+- URLs remain the same — purely client-side toggle
+- No `/en` route prefix needed
 
 ---
 
@@ -201,7 +261,7 @@ See section 5.5 above.
 
 ## 8. Performance & SEO
 
-- Images: use Astro's `<Image>` component for optimization
+- Images: use Astro's `<Image>` component for optimization; profile photo expected at `public/assets/images/profile.png` (existing), dimensions `width={240} height={270}`, `alt="Hanzell Rivera"`
 - Fonts: keep local Inter + Outfit (already in repo)
 - Animations: CSS-only where possible (no heavy JS libraries), `prefers-reduced-motion` respected
 - Meta tags: update title, description, OG image
