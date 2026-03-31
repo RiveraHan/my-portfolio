@@ -1,41 +1,138 @@
-/* ========== import font source ========== */
-@import "fonts.css";
+/* src/styles/style.css */
+@import "tailwindcss";
+@import "./fonts.css";
 
-/* ========== import custom styles ========== */
-@import "custom-styles.css";
+@theme {
+  /* Colors */
+  --color-bg:      #080c12;
+  --color-bg2:     #0d1117;
+  --color-bg3:     #161b22;
+  --color-bg4:     #21262d;
+  --color-border:  #21262d;
+  --color-border2: #30363d;
+  --color-text:    #e6edf3;
+  --color-text2:   #8b949e;
+  --color-text3:   #6e7681;
+  --color-blue:    #58a6ff;
+  --color-green:   #3fb950;
+  --color-purple:  #d2a8ff;
+  --color-yellow:  #e3b341;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+  /* Fonts */
+  --font-inter:   'Inter', sans-serif;
+  --font-outfit:  'Outfit', sans-serif;
+  --font-mono:    'Cascadia Code', 'Fira Code', 'SF Mono', monospace;
+}
 
-/* ========== tailwind custom styles ========== */
-@layer components {
-  body {
-    @apply bg-light dark:bg-dark;
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-inter);
+}
+
+/* ── i18n: hide inactive language ── */
+html[data-lang="es"] [data-lang="en"] { display: none; }
+html[data-lang="en"] [data-lang="es"] { display: none; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-bg4); border-radius: 2px; }
+
+/* ── Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit);
+}
+
+/* ── Layout ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Animations ── */
+@keyframes blink {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--color-green); }
+  50% { opacity: 0.3; box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
-  .container {
-    @apply max-w-[1112px] mx-auto px-4;
-  }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-outfit;
-  }
-  h1 {
-    @apply text-6xl sm:text-8xl main-heading;
-  }
-  h2 {
-    @apply text-xl font-semibold;
-  }
-  p,
-  li,
-  a {
-    @apply font-inter text-dark-gray;
-  }
-  .footer-icons {
-    @apply dark:text-light flex items-center border border-dark dark:border-light p-4 rounded-lg justify-center;
-  }
+}
+
+/* ── Utility classes ── */
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-blue);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(88,166,255,0.13), transparent);
+  margin: 0;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-blue), var(--color-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6875rem;
+  border-radius: 0.3125rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.pill-blue   { background: rgba(88,166,255,0.1);  border: 1px solid rgba(88,166,255,0.2);  color: var(--color-blue); }
+.pill-green  { background: rgba(63,185,80,0.1);   border: 1px solid rgba(63,185,80,0.2);   color: var(--color-green); }
+.pill-purple { background: rgba(210,168,255,0.1); border: 1px solid rgba(210,168,255,0.2); color: var(--color-purple); }
+.pill-yellow { background: rgba(227,179,65,0.1);  border: 1px solid rgba(227,179,65,0.2);  color: var(--color-yellow); }
+
+.btn-primary {
+  background: var(--color-blue);
+  color: #0d1117;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; }
+
+.btn-ghost {
+  border: 1px solid var(--color-border2);
+  color: var(--color-text2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-ghost:hover { border-color: var(--color-blue); color: var(--color-text); }
+
+.card {
+  background: var(--color-bg3);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
 }
