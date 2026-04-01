@@ -61,7 +61,9 @@ const en = i18n.en.experience
                   )}
                 </div>
                 <p class="text-xs text-[var(--color-blue)] font-semibold mb-3">{job.position}</p>
-                <p class="text-xs text-[var(--color-text3)] leading-relaxed mb-3">{job.description[0]}</p>
+                {job.description.map((desc) => (
+                  <p class="text-xs text-[var(--color-text3)] leading-relaxed mb-3">{desc}</p>
+                ))}
                 {job.tags && job.tags.length > 0 && (
                   <div class="flex flex-wrap gap-1.5">
                     {job.tags.map((tag) => (
