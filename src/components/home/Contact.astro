@@ -1,0 +1,163 @@
+---
+// src/components/home/Contact.astro
+import { info } from '@data/info'
+import { i18n } from '@data/i18n'
+const es = i18n.es.contact
+const en = i18n.en.contact
+const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID ?? ''
+---
+
+<section id="contact" class="py-24 bg-[var(--color-bg2)]">
+  <div class="container">
+    <p class="section-eyebrow"><span data-lang="es">{es.eyebrow}</span><span data-lang="en">{en.eyebrow}</span></p>
+    <h2 class="text-3xl font-black text-[var(--color-text)] mb-3 tracking-tight">
+      <span data-lang="es">{es.title}</span>
+      <span data-lang="en">{en.title}</span>
+    </h2>
+    <p class="text-[var(--color-text2)] text-sm mb-10 max-w-[500px]">
+      <span data-lang="es">{es.subtitle}</span>
+      <span data-lang="en">{en.subtitle}</span>
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-14">
+      <!-- Left: info -->
+      <div>
+        <h3 class="text-xl font-bold text-[var(--color-text)] mb-3">
+          <span data-lang="es">{es.headline}</span>
+          <span data-lang="en">{en.headline}</span>
+        </h3>
+        <p class="text-sm text-[var(--color-text3)] leading-relaxed mb-7">
+          <span data-lang="es">{es.body}</span>
+          <span data-lang="en">{en.body}</span>
+        </p>
+
+        <div class="flex flex-col gap-3">
+          {[
+            { icon: '✉️', label: 'Email', value: 'hanzellrivera95@gmail.com', href: info.socialMedia.email },
+            { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/hanzell-rivera', href: info.socialMedia.linkedin },
+            { icon: '🐙', label: 'GitHub', value: 'github.com/RiveraHan', href: info.socialMedia.github },
+            { icon: '🇳🇮', label: 'Ubicación', value: es.location, href: undefined },
+          ].map(item => (
+            <div class="flex items-center gap-3 card p-3 px-4">
+              <span class="text-base">{item.icon}</span>
+              <div>
+                <p class="text-[10px] text-[var(--color-text3)]">{item.label}</p>
+                {item.href
+                  ? <a href={item.href} target="_blank" rel="noopener" class="text-sm font-semibold text-[var(--color-text)] hover:text-[var(--color-blue)] transition-colors">{item.value}</a>
+                  : <p class="text-sm font-semibold text-[var(--color-text)]">{item.value}</p>
+                }
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <form id="contact-form" class="flex flex-col gap-4" data-formspree-id={formspreeId}>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-mono text-[var(--color-text2)] tracking-wider">
+            <span data-lang="es">{es.nameLabel}</span>
+            <span data-lang="en">{en.nameLabel}</span>
+          </label>
+          <input name="name" type="text" required
+            class="bg-[var(--color-bg3)] border border-[var(--color-border2)] rounded-lg px-3.5 py-2.5 text-sm text-[var(--color-text)] focus:outline-none focus:border-[var(--color-blue)] transition-colors"
+            placeholder-es={es.namePlaceholder}
+            placeholder-en={en.namePlaceholder}
+            placeholder={es.namePlaceholder}
+          />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-mono text-[var(--color-text2)] tracking-wider">
+            <span data-lang="es">{es.emailLabel}</span>
+            <span data-lang="en">{en.emailLabel}</span>
+          </label>
+          <input name="email" type="email" required
+            class="bg-[var(--color-bg3)] border border-[var(--color-border2)] rounded-lg px-3.5 py-2.5 text-sm text-[var(--color-text)] focus:outline-none focus:border-[var(--color-blue)] transition-colors"
+            placeholder-es={es.emailPlaceholder}
+            placeholder-en={en.emailPlaceholder}
+            placeholder={es.emailPlaceholder}
+          />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="text-[10px] font-mono text-[var(--color-text2)] tracking-wider">
+            <span data-lang="es">{es.messageLabel}</span>
+            <span data-lang="en">{en.messageLabel}</span>
+          </label>
+          <textarea name="message" rows="5" required
+            class="bg-[var(--color-bg3)] border border-[var(--color-border2)] rounded-lg px-3.5 py-2.5 text-sm text-[var(--color-text)] focus:outline-none focus:border-[var(--color-blue)] transition-colors resize-y"
+            placeholder-es={es.messagePlaceholder}
+            placeholder-en={en.messagePlaceholder}
+            placeholder={es.messagePlaceholder}
+          ></textarea>
+        </div>
+
+        <button type="submit"
+          id="submit-btn"
+          disabled={!formspreeId}
+          class="btn-primary text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          title={!formspreeId ? 'Form not configured' : ''}>
+          <span data-lang="es">{es.submit}</span>
+          <span data-lang="en">{en.submit}</span>
+        </button>
+
+        <p id="form-feedback" class="text-xs text-center hidden"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Update input placeholders when lang changes
+  function updatePlaceholders() {
+    const lang = document.documentElement.getAttribute('data-lang') || 'es'
+    document.querySelectorAll('[placeholder-es]').forEach(el => {
+      el.placeholder = el.getAttribute(`placeholder-${lang}`) || ''
+    })
+  }
+  updatePlaceholders()
+
+  // Watch for lang changes
+  new MutationObserver(updatePlaceholders).observe(
+    document.documentElement,
+    { attributes: true, attributeFilter: ['data-lang'] }
+  )
+
+  // Form submission
+  const form = document.getElementById('contact-form')
+  const feedback = document.getElementById('form-feedback')
+  const submitBtn = document.getElementById('submit-btn')
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    const id = form.dataset.formspreeId
+    if (!id) return
+
+    submitBtn.disabled = true
+    submitBtn.textContent = '...'
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${id}`, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      })
+      const lang = document.documentElement.getAttribute('data-lang') || 'es'
+      if (res.ok) {
+        feedback.textContent = lang === 'es' ? '¡Mensaje enviado! Te respondo pronto.' : "Message sent! I'll get back to you soon."
+        feedback.className = 'text-xs text-center text-[var(--color-green)]'
+        form.reset()
+      } else {
+        throw new Error()
+      }
+    } catch {
+      const lang = document.documentElement.getAttribute('data-lang') || 'es'
+      feedback.textContent = lang === 'es'
+        ? 'Error al enviar. Intenta de nuevo o escríbeme directo.'
+        : 'Error sending. Try again or email me directly.'
+      feedback.className = 'text-xs text-center text-[var(--color-red,#f85149)]'
+      submitBtn.disabled = false
+      submitBtn.textContent = lang === 'es' ? 'Enviar mensaje →' : 'Send message →'
+    }
+    feedback.classList.remove('hidden')
+  })
+</script>
