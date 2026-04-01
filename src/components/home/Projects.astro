@@ -1,0 +1,77 @@
+---
+// src/components/home/Projects.astro
+import { info } from '@data/info'
+import { i18n } from '@data/i18n'
+import ProjectCard from '@components/general/ProjectCard.astro'
+
+const es = i18n.es.projects
+const en = i18n.en.projects
+const acaluva = info.projects.find(p => p.title === 'Acaluva')!
+const rest = info.projects.filter(p => p.title !== 'Acaluva')
+---
+
+<section id="projects" class="py-24 bg-[var(--color-bg2)]">
+  <div class="container">
+    <p class="section-eyebrow"><span data-lang="es">{es.eyebrow}</span><span data-lang="en">{en.eyebrow}</span></p>
+    <h2 class="text-3xl font-black text-[var(--color-text)] mb-3 tracking-tight">
+      <span data-lang="es">{es.title}</span>
+      <span data-lang="en">{en.title}</span>
+    </h2>
+    <p class="text-[var(--color-text2)] text-sm mb-10">
+      <span data-lang="es">{es.subtitle}</span>
+      <span data-lang="en">{en.subtitle}</span>
+    </p>
+
+    <!-- Acaluva Featured -->
+    <div class="rounded-2xl p-8 mb-8 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
+         style="background: linear-gradient(135deg, rgba(88,166,255,0.04), rgba(63,185,80,0.03)); border: 1px solid rgba(88,166,255,0.15)">
+      <div>
+        <div class="inline-flex items-center gap-2 bg-[rgba(210,168,255,0.1)] border border-[rgba(210,168,255,0.2)] text-[var(--color-purple)] px-3 py-1 rounded-full text-[10px] font-semibold mb-4">
+          <span data-lang="es">{es.featuredBadge}</span>
+          <span data-lang="en">{en.featuredBadge}</span>
+        </div>
+        <h3 class="text-4xl font-black text-[var(--color-text)] tracking-tight mb-2">Acaluva</h3>
+        <p class="text-sm text-[var(--color-blue)] font-semibold mb-4">
+          <span data-lang="es">{es.featuredSub}</span>
+          <span data-lang="en">{en.featuredSub}</span>
+        </p>
+        <p class="text-xs text-[var(--color-text3)] leading-relaxed mb-5">{acaluva.description}</p>
+        <div class="flex flex-wrap gap-2 mb-6">
+          {acaluva.tags.map(tag => <span class="pill pill-blue">{tag}</span>)}
+        </div>
+        <div class="flex gap-3">
+          <a href={acaluva.liveUrl} target="_blank" rel="noopener" class="btn-primary text-sm">
+            <span data-lang="es">{es.viewLive}</span>
+            <span data-lang="en">{en.viewLive}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="grid grid-cols-2 gap-3">
+        {[
+          { esVal: es.metric1Val, enVal: en.metric1Val, esLabel: es.metric1Label, enLabel: en.metric1Label },
+          { esVal: es.metric2Val, enVal: en.metric2Val, esLabel: es.metric2Label, enLabel: en.metric2Label },
+          { esVal: es.metric3Val, enVal: en.metric3Val, esLabel: es.metric3Label, enLabel: en.metric3Label },
+          { esVal: es.metric4Val, enVal: en.metric4Val, esLabel: es.metric4Label, enLabel: en.metric4Label },
+        ].map(m => (
+          <div class="bg-[rgba(255,255,255,0.03)] border border-[var(--color-border)] rounded-xl p-4 text-center">
+            <div class="text-xl font-black text-[var(--color-blue)]">
+              <span data-lang="es">{m.esVal}</span>
+              <span data-lang="en">{m.enVal}</span>
+            </div>
+            <div class="text-[10px] text-[var(--color-text3)] mt-1">
+              <span data-lang="es">{m.esLabel}</span>
+              <span data-lang="en">{m.enLabel}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Project grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {rest.map(project => <ProjectCard project={project} />)}
+    </div>
+  </div>
+</section>

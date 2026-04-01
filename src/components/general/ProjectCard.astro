@@ -1,80 +1,35 @@
 ---
-import { IProjectDetails } from "@types";
-const { projectDetail } = Astro.props as IProjectDetails;
-const { title, thumbnail, liveUrl, githubUrl } = projectDetail;
+// src/components/general/ProjectCard.astro
+import type { IProject } from '@types'
+interface Props { project: IProject }
+const { project } = Astro.props
+const { title, thumbnail, thumbnailGradient, description, tags, githubUrl, liveUrl } = project
 ---
 
-<article class="w-full max-h-[25rem] overflow-hidden relative group">
-  <div class="flex items-center absolute right-4 top-4 z-10">
-    {
-      githubUrl && (
-        <a
-          href={githubUrl}
-          class="text-white p-3 bg-black/50 rounded-full backdrop-blur-md"
-          aria-label="Social Media"
-          target="_blank"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-github"
-          >
-            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-          </svg>
-        </a>
-      )
-    }
-
-    {
-      liveUrl && (
-        <a
-          href={liveUrl}
-          class="text-white p-3 bg-black/50 rounded-full backdrop-blur-md ml-1"
-          aria-label="Social Media"
-          target="_blank"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-link-2"
-          >
-            <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3" />
-            <line x1="8" y1="12" x2="16" y2="12" />
-          </svg>
-        </a>
-      )
+<article class="card overflow-hidden hover:border-[var(--color-blue)]/50 hover:-translate-y-0.5 transition-all duration-200 flex flex-col">
+  <!-- Thumbnail -->
+  <div class="h-[130px] flex items-center justify-center overflow-hidden"
+       style={thumbnailGradient ? `background: ${thumbnailGradient}` : ''}>
+    {thumbnail
+      ? <img src={thumbnail} alt={title} class="w-full h-full object-cover" loading="lazy" />
+      : <span class="text-4xl opacity-30">{'</>'}</span>
     }
   </div>
-  <a
-  href={liveUrl ? liveUrl : githubUrl}
-  target="_blank"
-  >
-    <img
-    src={thumbnail}
-    class="w-full h-auto scale-100 hover:scale-110 transition duration-[1.5s]"
-    loading="lazy"
-    width="100%"
-    height="100%"
-    alt="featureImage"
-  />
-  </a>
-  <div
-    class="absolute w-full bottom-0 left-0 backdrop-blur-md dark:text-white text-white bg-black/50 p-4 translate-y-[100%] group-hover:translate-y-0 transition duration-700"
-  >
-    <h3 class="mr-2 text-xl">{title}</h3>
+
+  <!-- Body -->
+  <div class="p-4 flex flex-col flex-1">
+    <h3 class="text-sm font-bold text-[var(--color-text)] mb-2">{title}</h3>
+    <p class="text-[10.5px] text-[var(--color-text3)] leading-relaxed mb-3 flex-1">{description}</p>
+
+    <div class="flex flex-wrap gap-1 mb-3">
+      {tags.map((tag) => (
+        <span class="bg-[var(--color-bg4)] text-[var(--color-text3)] px-1.5 py-0.5 rounded text-[9px] font-mono">{tag}</span>
+      ))}
+    </div>
+
+    <div class="flex gap-3 pt-3 border-t border-[var(--color-border)]">
+      {liveUrl && <a href={liveUrl} target="_blank" rel="noopener" class="text-[10px] text-[var(--color-blue)] font-mono hover:underline">↗ Live</a>}
+      {githubUrl && <a href={githubUrl} target="_blank" rel="noopener" class="text-[10px] text-[var(--color-text3)] font-mono hover:text-[var(--color-text)]">gh GitHub</a>}
+    </div>
   </div>
 </article>
