@@ -12,7 +12,7 @@ const { title, thumbnail, thumbnailGradient, description, tags, githubUrl, liveU
        style={thumbnailGradient ? `background: ${thumbnailGradient}` : ''}>
     {thumbnail
       ? <img src={thumbnail} alt={title} class="w-full h-full object-cover" loading="lazy" />
-      : <span class="text-4xl opacity-30">{'</>'}</span>
+      : !thumbnailGradient && <span class="text-4xl opacity-30">{'</>'}</span>
     }
   </div>
 
@@ -29,7 +29,7 @@ const { title, thumbnail, thumbnailGradient, description, tags, githubUrl, liveU
 
     <div class="flex gap-3 pt-3 border-t border-[var(--color-border)]">
       {liveUrl && <a href={liveUrl} target="_blank" rel="noopener" class="text-[10px] text-[var(--color-blue)] font-mono hover:underline">↗ Live</a>}
-      {githubUrl && <a href={githubUrl} target="_blank" rel="noopener" class="text-[10px] text-[var(--color-text3)] font-mono hover:text-[var(--color-text)]">gh GitHub</a>}
+      {githubUrl && <a href={githubUrl} target="_blank" rel="noopener" class="text-[10px] text-[var(--color-text3)] font-mono hover:text-[var(--color-text)]">↗ GitHub</a>}
     </div>
   </div>
 </article>

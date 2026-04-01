@@ -32,23 +32,41 @@ const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID ?? ''
         </p>
 
         <div class="flex flex-col gap-3">
-          {[
-            { icon: '✉️', label: 'Email', value: 'hanzellrivera95@gmail.com', href: info.socialMedia.email },
-            { icon: '💼', label: 'LinkedIn', value: 'linkedin.com/in/hanzell-rivera', href: info.socialMedia.linkedin },
-            { icon: '🐙', label: 'GitHub', value: 'github.com/RiveraHan', href: info.socialMedia.github },
-            { icon: '🇳🇮', label: 'Ubicación', value: es.location, href: undefined },
-          ].map(item => (
-            <div class="flex items-center gap-3 card p-3 px-4">
-              <span class="text-base">{item.icon}</span>
-              <div>
-                <p class="text-[10px] text-[var(--color-text3)]">{item.label}</p>
-                {item.href
-                  ? <a href={item.href} target="_blank" rel="noopener" class="text-sm font-semibold text-[var(--color-text)] hover:text-[var(--color-blue)] transition-colors">{item.value}</a>
-                  : <p class="text-sm font-semibold text-[var(--color-text)]">{item.value}</p>
-                }
-              </div>
+          <!-- Email -->
+          <div class="flex items-center gap-3 card p-3 px-4">
+            <span class="text-base">✉️</span>
+            <div>
+              <p class="text-[10px] text-[var(--color-text3)]">Email</p>
+              <a href={info.socialMedia.email} target="_blank" rel="noopener" class="text-sm font-semibold text-[var(--color-text)] hover:text-[var(--color-blue)] transition-colors">hanzellrivera95@gmail.com</a>
             </div>
-          ))}
+          </div>
+          <!-- LinkedIn -->
+          <div class="flex items-center gap-3 card p-3 px-4">
+            <span class="text-base">💼</span>
+            <div>
+              <p class="text-[10px] text-[var(--color-text3)]">LinkedIn</p>
+              <a href={info.socialMedia.linkedin} target="_blank" rel="noopener" class="text-sm font-semibold text-[var(--color-text)] hover:text-[var(--color-blue)] transition-colors">linkedin.com/in/hanzell-rivera</a>
+            </div>
+          </div>
+          <!-- GitHub -->
+          <div class="flex items-center gap-3 card p-3 px-4">
+            <span class="text-base">🐙</span>
+            <div>
+              <p class="text-[10px] text-[var(--color-text3)]">GitHub</p>
+              <a href={info.socialMedia.github} target="_blank" rel="noopener" class="text-sm font-semibold text-[var(--color-text)] hover:text-[var(--color-blue)] transition-colors">github.com/RiveraHan</a>
+            </div>
+          </div>
+          <!-- Location -->
+          <div class="flex items-center gap-3 card p-3 px-4">
+            <span class="text-base">🇳🇮</span>
+            <div>
+              <p class="text-[10px] text-[var(--color-text3)]">
+                <span data-lang="es">{es.locationLabel}</span>
+                <span data-lang="en">{en.locationLabel}</span>
+              </p>
+              <p class="text-sm font-semibold text-[var(--color-text)]">{es.location}</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -133,7 +151,6 @@ const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID ?? ''
     if (!id) return
 
     submitBtn.disabled = true
-    submitBtn.textContent = '...'
 
     try {
       const res = await fetch(`https://formspree.io/f/${id}`, {
@@ -156,7 +173,6 @@ const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID ?? ''
         : 'Error sending. Try again or email me directly.'
       feedback.className = 'text-xs text-center text-[var(--color-red,#f85149)]'
       submitBtn.disabled = false
-      submitBtn.textContent = lang === 'es' ? 'Enviar mensaje →' : 'Send message →'
     }
     feedback.classList.remove('hidden')
   })

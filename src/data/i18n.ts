@@ -90,6 +90,7 @@ export const i18n = {
       success: '¡Mensaje enviado! Te respondo pronto.',
       error: 'Error al enviar. Intenta de nuevo o escríbeme directo.',
       location: 'Managua, Nicaragua · Remote First',
+      locationLabel: 'Ubicación',
     },
     footer: {
       rights: '© 2026 Hanzell Rivera',
@@ -187,6 +188,7 @@ export const i18n = {
       success: "Message sent! I'll get back to you soon.",
       error: 'Error sending. Try again or email me directly.',
       location: 'Managua, Nicaragua · Remote First',
+      locationLabel: 'Location',
     },
     footer: {
       rights: '© 2026 Hanzell Rivera',
