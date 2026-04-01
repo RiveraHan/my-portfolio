@@ -1,61 +1,84 @@
-# Portfolio Hanzell Rivera
+# Hanzell Rivera — Portfolio
 
-## 🚀 Project Structure
+Personal portfolio built with Astro 6 + TailwindCSS 4. Bilingual (ES/EN), Dark Tech aesthetic, deployed on Vercel.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Stack
+
+- **Astro 6** — static output
+- **TailwindCSS 4** — via `@tailwindcss/vite` plugin
+- **TypeScript**
+- **Formspree** — contact form
+- **Vercel** — hosting
+
+## Project Structure
 
 ```
 /
 ├── public/
-│   ├── assets
-│   │   ├── fonts
-|   |   └── images
-│   └── favicon.ico
+│   └── assets/
+│       ├── cv/
+│       │   ├── Hanzell_Rivera_CV_ES.pdf
+│       │   └── Hanzell_Rivera_CV_EN.pdf
+│       ├── fonts/
+│       └── images/
+│           └── profile.png
 ├── src/
 │   ├── components/
-│   │   ├── home/
-|   |   └── general/
-|   |       ├── Header.astro
-|   |       ├── Footer.astro
-|   |       └── ...
+│   │   ├── general/
+│   │   │   ├── Navbar.astro
+│   │   │   ├── Footer.astro
+│   │   │   ├── MetaHead.astro
+│   │   │   ├── ProjectCard.astro
+│   │   │   └── ProjectsWrapper.astro
+│   │   └── home/
+│   │       ├── Hero.astro
+│   │       ├── About.astro
+│   │       ├── Skills.astro
+│   │       ├── Experience.astro
+│   │       ├── Projects.astro
+│   │       ├── Education.astro
+│   │       └── Contact.astro
 │   ├── data/
+│   │   ├── info.ts       ← personal data (experience, projects)
+│   │   └── i18n.ts       ← all ES/EN strings
 │   ├── layouts/
-│   |   |── Layout.astro
-│   |   └── ...
+│   │   └── Layout.astro
 │   ├── pages/
-│   |   ├── index.astro
-│   |   
+│   │   └── index.astro
 │   ├── styles/
-│   |   |── custom-styles.css
-│   |   |── fonts.css
-│   |   └── style.css
-│   ├── types/
-│   ├── utils/
-├── package.json
-└── ...
+│   │   ├── style.css     ← TailwindCSS 4 + design tokens
+│   │   └── fonts.css
+│   └── types/
+│       └── index.ts
+├── .env.example
+└── astro.config.mjs
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Setup
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+pnpm install
+pnpm dev
+```
 
-Any static assets, like images, can be placed in the `public/assets` directory.
+### Environment Variables
 
-Your personal data would be go on `src/data` directory.
+Copy `.env.example` to `.env` and fill in:
 
-## 🧞 Commands
+```
+PUBLIC_FORMSPREE_ID=your_form_id
+```
 
-All commands are run from the root of the project, from a terminal:
+Get a free form ID at [formspree.io](https://formspree.io).
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
+## Commands
 
-## 👀 Want to learn more?
+| Command       | Action                        |
+|---------------|-------------------------------|
+| `pnpm dev`    | Dev server at localhost:4321  |
+| `pnpm build`  | Build to `./dist/`            |
+| `pnpm preview`| Preview production build      |
 
-Feel free to check [Astro documentation](https://docs.astro.build) or jump into Astro [Discord server](https://astro.build/chat).
+## Deploy
+
+Hosted on Vercel. Add `PUBLIC_FORMSPREE_ID` in Project Settings → Environment Variables.
