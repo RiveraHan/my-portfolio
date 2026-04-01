@@ -1,0 +1,62 @@
+---
+// src/components/home/Skills.astro
+import { i18n } from '@data/i18n'
+const es = i18n.es.skills
+const en = i18n.en.skills
+
+const skillCategories = [
+  {
+    esTitle: es.mobile, enTitle: en.mobile,
+    dotClass: 'bg-[var(--color-blue)]',
+    skills: ['Flutter', 'Dart', 'BLoC', 'RiverPod', 'Freezed', 'Push Notifications', 'React Native', 'FaceTec SDK'],
+  },
+  {
+    esTitle: es.backend, enTitle: en.backend,
+    dotClass: 'bg-[var(--color-green)]',
+    skills: ['Node.js', 'Python', 'FastAPI', 'Express.js', 'C# .NET Core', 'ASP.NET', 'Redis', 'REST APIs'],
+  },
+  {
+    esTitle: es.frontend, enTitle: en.frontend,
+    dotClass: 'bg-[var(--color-purple)]',
+    skills: ['React', 'Next.js', 'TypeScript', 'Astro', 'TailwindCSS'],
+  },
+  {
+    esTitle: es.cloud, enTitle: en.cloud,
+    dotClass: 'bg-[var(--color-yellow)]',
+    skills: ['AWS Bedrock', 'Azure Functions', 'Firebase', 'PostgreSQL', 'MySQL', 'SQL Server'],
+  },
+]
+---
+
+<section id="skills" class="py-24 bg-[var(--color-bg2)]">
+  <div class="container">
+    <p class="section-eyebrow"><span data-lang="es">{es.eyebrow}</span><span data-lang="en">{en.eyebrow}</span></p>
+    <h2 class="text-3xl font-black text-[var(--color-text)] mb-3 tracking-tight">
+      <span data-lang="es">{es.title}</span>
+      <span data-lang="en">{en.title}</span>
+    </h2>
+    <p class="text-[var(--color-text2)] text-sm mb-10">
+      <span data-lang="es">{es.subtitle}</span>
+      <span data-lang="en">{en.subtitle}</span>
+    </p>
+
+    <div class="flex flex-col gap-8">
+      {skillCategories.map((cat) => (
+        <div>
+          <p class="text-xs text-[var(--color-text3)] uppercase tracking-[0.15em] font-mono mb-4">
+            <span data-lang="es">{cat.esTitle}</span>
+            <span data-lang="en">{cat.enTitle}</span>
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {cat.skills.map((skill) => (
+              <div class="flex items-center gap-2 bg-[var(--color-bg3)] border border-[var(--color-border)] px-3 py-2 rounded-lg text-xs font-semibold text-[var(--color-text2)] hover:border-[var(--color-blue)] hover:text-[var(--color-text)] transition-colors cursor-default">
+                <span class={`w-[6px] h-[6px] rounded-full flex-shrink-0 ${cat.dotClass}`}></span>
+                {skill}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
