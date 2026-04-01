@@ -3,7 +3,8 @@
 import { i18n } from '@data/i18n'
 const es = i18n.es.nav
 const en = i18n.en.nav
-const cvPath = '/assets/cv/Hanzell_Rivera_CV.pdf'
+const cvPathEs = '/assets/cv/Hanzell_Rivera_CV_ES.pdf'
+const cvPathEn = '/assets/cv/Hanzell_Rivera_CV_EN.pdf'
 ---
 
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center justify-between px-8 bg-[var(--color-bg)]/90 backdrop-blur-[16px] border-b border-[var(--color-border)]/40 transition-all">
@@ -26,8 +27,8 @@ const cvPath = '/assets/cv/Hanzell_Rivera_CV.pdf'
       ES · EN
     </button>
     <a id="cv-btn"
-       href={cvPath}
-       download="Hanzell_Rivera_CV.pdf"
+       href={cvPathEs}
+       download="Hanzell_Rivera_CV_ES.pdf"
        class="hidden md:flex items-center gap-1 bg-[var(--color-blue)] text-[#0d1117] px-3 py-[6px] rounded-[7px] text-xs font-bold">
       <span data-lang="es">{es.downloadCv}</span>
       <span data-lang="en">{en.downloadCv}</span>
@@ -51,7 +52,7 @@ const cvPath = '/assets/cv/Hanzell_Rivera_CV.pdf'
   <a href="#contact"    class="mobile-link"><span data-lang="es">{es.contact}</span><span data-lang="en">{en.contact}</span></a>
   <div class="flex gap-3 mt-4">
     <button id="lang-toggle-mobile" class="bg-[var(--color-bg3)] border border-[var(--color-border2)] text-[var(--color-text2)] px-4 py-2 rounded-full text-sm font-bold">ES · EN</button>
-    <a id="cv-btn-mobile" href={cvPath} download="Hanzell_Rivera_CV.pdf" class="btn-primary text-sm">
+    <a id="cv-btn-mobile" href={cvPathEs} download="Hanzell_Rivera_CV_ES.pdf" class="btn-primary text-sm">
       <span data-lang="es">{es.downloadCv}</span>
       <span data-lang="en">{en.downloadCv}</span>
     </a>
@@ -76,6 +77,22 @@ const cvPath = '/assets/cv/Hanzell_Rivera_CV.pdf'
 </style>
 
 <script is:inline>
+  var CV = {
+    es: { href: '/assets/cv/Hanzell_Rivera_CV_ES.pdf', download: 'Hanzell_Rivera_CV_ES.pdf' },
+    en: { href: '/assets/cv/Hanzell_Rivera_CV_EN.pdf', download: 'Hanzell_Rivera_CV_EN.pdf' },
+  }
+
+  function updateCvLinks(lang) {
+    var cv = CV[lang] || CV.es
+    ;['cv-btn', 'cv-btn-mobile'].forEach(function(id) {
+      var el = document.getElementById(id)
+      if (el) {
+        el.setAttribute('href', cv.href)
+        el.setAttribute('download', cv.download)
+      }
+    })
+  }
+
   function toggleLang() {
     const html = document.documentElement
     const current = html.getAttribute('data-lang') || 'es'
@@ -83,7 +100,11 @@ const cvPath = '/assets/cv/Hanzell_Rivera_CV.pdf'
     html.setAttribute('data-lang', next)
     html.setAttribute('lang', next)
     try { localStorage.setItem('lang', next) } catch (e) {}
+    updateCvLinks(next)
   }
+
+  // Set correct CV on page load
+  updateCvLinks(document.documentElement.getAttribute('data-lang') || 'es')
 
   document.getElementById('lang-toggle')?.addEventListener('click', toggleLang)
   document.getElementById('lang-toggle-mobile')?.addEventListener('click', toggleLang)
@@ -112,33 +133,4 @@ const cvPath = '/assets/cv/Hanzell_Rivera_CV.pdf'
     }
   })
 
-  // CV fallback: if PDF doesn't exist (404), link to LinkedIn instead
-  const cvBtn = document.getElementById('cv-btn')
-  if (cvBtn) {
-    fetch('/assets/cv/Hanzell_Rivera_CV.pdf', { method: 'HEAD' })
-      .then(res => {
-        if (!res.ok) {
-          cvBtn.setAttribute('href', 'https://www.linkedin.com/in/hanzell-rivera')
-          cvBtn.removeAttribute('download')
-        }
-      })
-      .catch(() => {
-        cvBtn.setAttribute('href', 'https://www.linkedin.com/in/hanzell-rivera')
-        cvBtn.removeAttribute('download')
-      })
-  }
-  const cvBtnMobile = document.getElementById('cv-btn-mobile')
-  if (cvBtnMobile) {
-    fetch('/assets/cv/Hanzell_Rivera_CV.pdf', { method: 'HEAD' })
-      .then(res => {
-        if (!res.ok) {
-          cvBtnMobile.setAttribute('href', 'https://www.linkedin.com/in/hanzell-rivera')
-          cvBtnMobile.removeAttribute('download')
-        }
-      })
-      .catch(() => {
-        cvBtnMobile.setAttribute('href', 'https://www.linkedin.com/in/hanzell-rivera')
-        cvBtnMobile.removeAttribute('download')
-      })
-  }
 </script>
