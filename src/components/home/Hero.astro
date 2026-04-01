@@ -1,16 +1,115 @@
 ---
-import { IHeroProps } from "@types";
-
-import Contact from "@components/general/Contact.astro";
-
-const { name, about } = Astro.props as IHeroProps;
+// src/components/home/Hero.astro
+import { info } from '@data/info'
+import { i18n } from '@data/i18n'
+const es = i18n.es.hero
+const en = i18n.en.hero
 ---
 
-<section>
-  <p class="dark:text-light mt-2">Hola, Soy</p>
-  <h1>{name}</h1>
-  <p class="italic dark:text-light text-lg mb-6">
-    {about}
-  </p>
-  <Contact />
+<section id="hero" class="relative min-h-screen flex items-center pt-[60px] overflow-hidden">
+  <!-- Background glows -->
+  <div class="pointer-events-none absolute top-0 right-0 w-[600px] h-[600px] rounded-full" style="background: radial-gradient(circle at 70% 30%, rgba(88,166,255,0.06) 0%, transparent 60%)"></div>
+  <div class="pointer-events-none absolute bottom-0 left-[-100px] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(circle, rgba(63,185,80,0.04) 0%, transparent 60%)"></div>
+
+  <div class="container w-full py-20 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-16 items-center">
+    <!-- Text -->
+    <div>
+      <!-- Status badge -->
+      <div class="inline-flex items-center gap-2 bg-[rgba(63,185,80,0.08)] border border-[rgba(63,185,80,0.2)] text-[var(--color-green)] px-3 py-[5px] rounded-full text-xs font-semibold mb-5">
+        <span class="w-[7px] h-[7px] rounded-full bg-[var(--color-green)]" style="animation: blink 2s infinite"></span>
+        {es.status}
+      </div>
+
+      <!-- Eyebrow -->
+      <p class="font-mono text-sm text-[var(--color-text3)] mb-2">
+        <span data-lang="es">{es.eyebrow}</span>
+        <span data-lang="en">{en.eyebrow}</span>
+      </p>
+
+      <!-- Name -->
+      <h1 class="font-outfit font-black leading-[0.95] tracking-[-3px] mb-2" style="font-size: clamp(3.5rem, 8vw, 5rem)">
+        <span class="block text-[var(--color-text)]">{info.name.split(' ')[0]}</span>
+        <span class="block gradient-text">{info.name.split(' ')[1]}</span>
+      </h1>
+
+      <!-- Title -->
+      <p class="text-[var(--color-text2)] text-lg mb-5">
+        <span data-lang="es">{es.title}</span>
+        <span data-lang="en">{en.title}</span>
+        {' '}<span class="text-[var(--color-purple)] font-semibold">
+          <span data-lang="es">{es.founder}</span>
+          <span data-lang="en">{en.founder}</span>
+        </span>
+      </p>
+
+      <!-- Bio -->
+      <p class="text-[var(--color-text3)] text-[0.9375rem] leading-[1.8] max-w-[500px] mb-7">
+        <span data-lang="es" set:html={es.bio} />
+        <span data-lang="en" set:html={en.bio} />
+      </p>
+
+      <!-- Tech pills -->
+      <div class="flex flex-wrap gap-2 mb-8">
+        <span class="pill pill-blue">Flutter / Dart</span>
+        <span class="pill pill-green">Node.js</span>
+        <span class="pill pill-purple">Python</span>
+        <span class="pill pill-yellow">C# .NET</span>
+        <span class="pill pill-blue">React / Next.js</span>
+        <span class="pill pill-green">AWS Bedrock</span>
+        <span class="pill pill-blue">PostgreSQL</span>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3 mb-7">
+        <a href="#projects" class="btn-primary">
+          <span data-lang="es">{es.ctaPrimary}</span>
+          <span data-lang="en">{en.ctaPrimary}</span>
+        </a>
+        <a href="#contact" class="btn-ghost">
+          <span data-lang="es">{es.ctaSecondary}</span>
+          <span data-lang="en">{en.ctaSecondary}</span>
+        </a>
+      </div>
+
+      <!-- Social links -->
+      <div class="flex gap-2">
+        <a href={info.socialMedia.linkedin} target="_blank" rel="noopener" class="social-btn" aria-label="LinkedIn">in</a>
+        <a href={info.socialMedia.github}   target="_blank" rel="noopener" class="social-btn" aria-label="GitHub">gh</a>
+        <a href={info.socialMedia.email}    class="social-btn" aria-label="Email">✉</a>
+      </div>
+    </div>
+
+    <!-- Avatar -->
+    <div class="relative flex justify-center">
+      <div class="absolute inset-[-10px] rounded-[28px] -z-10" style="background: linear-gradient(135deg, rgba(88,166,255,0.12), rgba(63,185,80,0.08), transparent, rgba(210,168,255,0.08))"></div>
+      <div class="w-[220px] h-[260px] md:w-[240px] md:h-[280px] rounded-[20px] overflow-hidden border border-[var(--color-border2)] bg-[var(--color-bg3)]">
+        <img
+          src="/assets/images/profile.png"
+          alt="Hanzell Rivera"
+          width={240}
+          height={280}
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+      </div>
+      <div class="absolute bottom-[-14px] left-1/2 -translate-x-1/2 bg-[var(--color-bg2)] border border-[var(--color-border2)] px-4 py-1 rounded-full text-xs text-[var(--color-text2)] whitespace-nowrap">
+        <span data-lang="es">{es.location}</span>
+        <span data-lang="en">{en.location}</span>
+      </div>
+    </div>
+  </div>
 </section>
+
+<style>
+  .social-btn {
+    width: 38px; height: 38px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-text3);
+    font-size: 13px; font-weight: 700;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--color-blue); color: var(--color-blue); }
+</style>
