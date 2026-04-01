@@ -1,39 +1,35 @@
 ---
-import { info } from "@data";
-
-import Layout from "@layouts/Layout.astro";
-import Hero from "@components/home/Hero.astro";
-import Experience from "@components/home/Experience.astro";
-import ProjectsWrapper from "@components/general/ProjectsWrapper.astro";
-import MetaHead from "@components/general/MetaHead.astro";
-
-const featureProjects = info.projects.reduce((accumulator, project) => {
-  if (accumulator.length < 6 && project.isFeatured) {
-    accumulator.push(project);
-  }
-  return accumulator;
-}, []);
+// src/pages/index.astro
+import { info } from '@data/info'
+import Layout from '@layouts/Layout.astro'
+import MetaHead from '@components/general/MetaHead.astro'
+import Hero from '@components/home/Hero.astro'
+import About from '@components/home/About.astro'
+import Skills from '@components/home/Skills.astro'
+import Experience from '@components/home/Experience.astro'
+import Projects from '@components/home/Projects.astro'
+import Education from '@components/home/Education.astro'
+import Contact from '@components/home/Contact.astro'
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <MetaHead
-      title={"Portfolio"}
-      description={info.about}
-      ogImageUrl={"/assets/images/profile.png"}
-    />
-  </head>
-
-  <body>
-    <Layout>
-      <Hero name={info.name} about={info.about} />
-      <Experience title={"experiencia".toLocaleUpperCase()} details={info.experience} />
-      <Experience title={"educacion".toLocaleUpperCase()} details={info.education} />
-      <section>
-        <h2 class="w-[15rem] dark:text-light mt-16">PROYECTOS</h2>
-        <ProjectsWrapper projects={featureProjects} />
-      </section>
-    </Layout>
-  </body>
-</html>
+<Layout>
+  <MetaHead
+    slot="head"
+    title="Hanzell Rivera — Flutter Dev · Full Stack · Founder"
+    description={info.about}
+    ogImageUrl="/assets/images/profile.png"
+  />
+  <Hero />
+  <div class="section-divider"></div>
+  <About />
+  <div class="section-divider"></div>
+  <Skills />
+  <div class="section-divider"></div>
+  <Experience />
+  <div class="section-divider"></div>
+  <Projects />
+  <div class="section-divider"></div>
+  <Education />
+  <div class="section-divider"></div>
+  <Contact />
+</Layout>
